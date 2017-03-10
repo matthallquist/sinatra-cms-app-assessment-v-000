@@ -46,7 +46,9 @@ class RecipesController < ApplicationController
   end
 
   delete '/recipes/:id/delete' do
-
+    @recipe = Recipe.find_by(:id => params[:id])
+    @recipe.delete
+    redirect to '/recipes'
   end
 
 
