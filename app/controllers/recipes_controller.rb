@@ -2,31 +2,50 @@ class RecipesController < ApplicationController
 
   get '/recipes' do
     @recipes = Recipe.all
-    erb :'/recipes/recipes'
+    if logged_in
+      erb :'/recipes/recipes'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/recipes/new' do
-    erb :'/recipes/new'
+    if logged_in
+      erb :'/recipes/new'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/recipes' do
     if params[:name] == "" || params[:category] == "" || params[:prep_time] == "" || params[:cook_time] == "" || params[:ingredients] == "" || params[:instructions] == ""
+      #need some kind of error
       redirect to '/recipes/new'
     else
       @recipe = Recipe.create(name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
+      @recipe.user = current_user.id
+      @recipe.user.recipes << @recipe
       @recipe.save
       redirect to '/recipes'
     end
   end
 
   get '/recipes/:id' do
-    @recipe = Recipe.find_by(:id => params[:id])
-    erb :'/recipes/show'
+    if logged_in
+      @recipe = Recipe.find_by(:id => params[:id])
+      erb :'/recipes/show'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/recipes/:id/edit' do
-    @recipe = Recipe.find_by(:id => params[:id])
-    erb :'/recipes/edit'
+    if logged_in
+      @recipe = Recipe.find_by(:id => params[:id])
+      erb :'/recipes/edit'
+    else
+      redirect to '/login'
+    end
   end
 
   patch '/recipes/:id' do
