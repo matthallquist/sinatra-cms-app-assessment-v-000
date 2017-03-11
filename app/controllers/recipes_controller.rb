@@ -42,7 +42,13 @@ class RecipesController < ApplicationController
   get '/recipes/:id/edit' do
     if logged_in
       @recipe = Recipe.find_by(:id => params[:id])
-      erb :'/recipes/edit'
+      if @recipe.user_id == current_user.id
+        @recipe = Recipe.find_by(:id => params[:id])
+        erb :'/recipes/edit'
+      else
+        #need error
+        redirect to "/recipes/#{ @recipe.id }"
+      end
     else
       redirect to '/login'
     end
@@ -66,8 +72,12 @@ class RecipesController < ApplicationController
 
   delete '/recipes/:id/delete' do
     @recipe = Recipe.find_by(:id => params[:id])
-    @recipe.delete
-    redirect to '/recipes'
+    if @recipe.user_id == current_user.id
+      @recipe.delete
+      redirect to '/recipes'
+    else
+      redirect to "/recipes/#{@recipe.id}"
+    end
   end
 
 
