@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
       redirect to '/recipes/new'
     else
       @recipe = Recipe.create(name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
-      @recipe.user = current_user.id
+      @recipe.user = current_user
       @recipe.user.recipes << @recipe
       @recipe.save
       redirect to '/recipes'
