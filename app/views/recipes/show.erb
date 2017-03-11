@@ -1,7 +1,7 @@
 <h1><%= @recipe.name %></h1>
 
 <h4>Recipe By:</h4>
-<p><%= @recipe.user.username %></p>
+<p><a href="/users/<%= @recipe.user.id %>"><%= @recipe.user.username %></a></p>
 
 <h4>Category:</h4>
 <p><%= @recipe.category %></p>

@@ -2,7 +2,7 @@
 
 <% @user.recipes.each do |recipe| %>
   <div>
-    <a href="/recipes/<%= recipe.id %>">recipe.name</a>
+    <a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a>
   </div>
 
 <% end %>
