@@ -9,18 +9,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:password] == "" || params[:email] == "" || params[:username] == ""
-      redirect to '/signup'
+    @user = User.create(:username => params[:username], :password => params[:password])
+    if @user.valid?
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/recipes'
     else
-      if User.find_by(:username => params[:username])
-        #need error here 'username exists'
-        redirect to '/signup'
-      else
-        @user = User.create(:username => params[:username], :password => params[:password])
-        @user.save
-        session[:user_id] = @user.id
-        redirect to '/recipes'
-      end
+      redirect to '/signup'
     end
   end
 
