@@ -18,15 +18,14 @@ class RecipesController < ApplicationController
   end
 
   post '/recipes' do
-    if params[:name] == "" || params[:category] == "" || params[:prep_time] == "" || params[:cook_time] == "" || params[:ingredients] == "" || params[:instructions] == ""
-      #need some kind of error
-      redirect to '/recipes/new'
-    else
-      @recipe = Recipe.create(name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
+    @recipe = Recipe.create(name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
+    if @recipe.valid?
       @recipe.user = current_user
       @recipe.user.recipes << @recipe
       @recipe.save
       redirect to '/recipes'
+    else
+      redirect to '/recipes/new'
     end
   end
 

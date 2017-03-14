@@ -17,10 +17,6 @@ class ApplicationController < Sinatra::Base
   end
 
   def logged_in
-    if session[:user_id] != nil
-      true
-    else
-      false
-    end
+    !!session[:user_id]
   end
 end
