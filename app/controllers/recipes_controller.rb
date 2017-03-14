@@ -42,10 +42,8 @@ class RecipesController < ApplicationController
     if logged_in
       @recipe = Recipe.find_by(:id => params[:id])
       if @recipe.user_id == current_user.id
-        @recipe = Recipe.find_by(:id => params[:id])
         erb :'/recipes/edit'
       else
-        #need error
         redirect to "/recipes/#{ @recipe.id }"
       end
     else
