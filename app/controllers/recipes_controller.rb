@@ -52,18 +52,18 @@ class RecipesController < ApplicationController
   end
 
   patch '/recipes/:id' do
-    if params[:name] == "" || params[:category] == "" || params[:prep_time] == "" || params[:cook_time] == "" || params[:ingredients] == "" || params[:instructions] == ""
-      redirect to "/recipes/#{params[:id]}/edit"
-    else
-      @recipe = Recipe.find_by(:id => params[:id])
-      @recipe.name = params[:name]
-      @recipe.category = params[:category]
-      @recipe.prep_time = params[:prep_time]
-      @recipe.cook_time = params[:cook_time]
-      @recipe.ingredients = params[:ingredients]
-      @recipe.instructions = params[:instructions]
+    @recipe = Recipe.find_by(:id => params[:id])
+    @recipe.name = params[:name]
+    @recipe.category = params[:category]
+    @recipe.prep_time = params[:prep_time]
+    @recipe.cook_time = params[:cook_time]
+    @recipe.ingredients = params[:ingredients]
+    @recipe.instructions = params[:instructions]
+    if @recipe.valid?
       @recipe.save
       redirect to "/recipes/#{@recipe.id}"
+    else
+      redirect to "/recipes/#{params[:id]}/edit"
     end
   end
 
