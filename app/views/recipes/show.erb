@@ -25,4 +25,22 @@
 
 <a href='/recipes/<%= @recipe.id %>/edit'>Edit</a><br>
 
+<a href='/recipes/<%= @recipe.id %>/review'>Review</a><br>
+
+<h2>Reviews</h2>
+
+<% if @recipe.reviews.any? %>
+  <% count = 1 %>
+  <% @recipe.reviews.each do |review| %>
+    <div>
+      <%= count %>.<br>
+      Rating: <%= review.rating %><br>
+      Content: <%= review.content %>
+    </div><br><br>
+    <% count += 1 %>
+  <% end %>
+<% else %>
+    No reviews yet! Be the first.
+<% end %>
+
 <a href='/recipes'>Index</a>
