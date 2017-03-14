@@ -106,4 +106,14 @@ class RecipesController < ApplicationController
     end
   end
 
+  delete '/recipes/:id/review/:id_two/delete' do
+    @review = Review.find_by(:id => params[:id_two])
+    if @review.user_id == current_user.id
+      @review.delete
+      redirect to '/recipes'
+    else
+      redirect to "/recipes/#{@recipe.id}"
+    end
+  end
+
 end
