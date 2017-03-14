@@ -3,6 +3,18 @@
   <link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 
+<p id="top"><%= current_user.username %>   <a href="/recipes">Home</a> <a href="/recipes/new">New Recipe</a> <a href="/users/<%= current_user.id %>">My Recipes</a> <a href="/logout">Logout</a></p>
+
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @review.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1>Review <%= @recipe.name %></h1>
 
 <form action="/recipes/<%= @recipe.id %>/review" method="POST">

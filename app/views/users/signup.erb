@@ -3,6 +3,16 @@
   <link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1>Create a new account</h1>
 
 <form action="/signup" method="POST">

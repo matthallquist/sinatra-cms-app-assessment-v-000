@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
+    @user = User.new
     if logged_in
       redirect to '/recipes'
     else
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
       current_user
       redirect to '/recipes'
     else
-      redirect to '/signup'
+      erb :'/users/signup'
     end
   end
 
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
       current_user
       redirect to '/recipes'
     else
-      redirect to '/signup'
+      erb :'/users/login'
     end
   end
 
