@@ -34,13 +34,14 @@
   <% @recipe.reviews.each do |review| %>
     <div>
       <%= count %>.<br>
+      Posted by: <a href="/users/<%= review.user_id %>"><%= review.user.username %></a><br>
       Rating: <%= review.rating %><br>
       Content: <%= review.content %>
     </div><br><br>
     <% count += 1 %>
   <% end %>
 <% else %>
-    No reviews yet! Be the first.
+    No reviews yet! Be the first.<br><br>
 <% end %>
 
 <a href='/recipes'>Index</a>

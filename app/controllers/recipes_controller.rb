@@ -80,10 +80,14 @@ class RecipesController < ApplicationController
 
   get '/recipes/:id/review' do
     @recipe = Recipe.find_by(:id => params[:id])
-    if @recipe.user_id != current_user.id
-      erb :'/reviews/new'
+    if logged_in
+      if @recipe.user_id != current_user.id
+        erb :'/reviews/new'
+      else
+        redirect to "/recipes/#{ @recipe.id }"
+      end
     else
-      redirect to "/recipes/#{ @recipe.id }"
+      redirect to '/login'
     end
   end
 
@@ -91,10 +95,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(:id => params[:id])
     @review = Review.create(rating: params[:rating], content: params[:content])
     if @review.valid?
-      @review.save
       @review.recipe = @recipe
       @recipe.reviews << @review
       @review.user_id = current_user.id
+      current_user.reviews << @review
+      @review.save
       redirect to "/recipes/#{ @recipe.id }"
     else
       redirect to "/recipes/#{ @recipe.id }/review"
