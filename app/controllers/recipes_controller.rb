@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
       @recipe.save
       redirect to '/recipes'
     else
-      redirect to '/recipes/new'
+      erb :'/recipes/new'
     end
   end
 
@@ -64,7 +64,7 @@ class RecipesController < ApplicationController
       @recipe.save
       redirect to "/recipes/#{@recipe.id}"
     else
-      redirect to "/recipes/#{params[:id]}/edit"
+      erb :'/recipes/edit'
     end
   end
 
