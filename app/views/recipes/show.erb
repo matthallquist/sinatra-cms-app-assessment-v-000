@@ -1,38 +1,44 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="/style.css" rel="stylesheet" type="text/css" />
+  <link href="/style1.css" rel="stylesheet" type="text/css" />
 </head>
 
 <p id="top"><%= current_user.username %>   <a href="/recipes">Home</a> <a href="/recipes/new">New Recipe</a> <a href="/users/<%= current_user.id %>">My Recipes</a> <a href="/logout">Logout</a></p>
 
 <h1><%= @recipe.name %></h1>
 
-<h4>Recipe By:</h4>
+<h3>Recipe By:</h3>
 <p><a href="/users/<%= @recipe.user.id %>"><%= @recipe.user.username %></a></p>
 
-<h4>Category:</h4>
+<h3>Category:</h3>
 <p><%= @recipe.category %></p>
 
-<h4>Prep Time:</h4>
+<h3>Prep Time:</h3>
 <p><%= @recipe.prep_time %></p>
 
-<h4>Cook Time:</h4>
+<h3>Cook Time:</h3>
 <p><%= @recipe.cook_time %></p>
 
-<h4>Ingredients:</h4>
+<h3>Ingredients:</h3>
 <p><%= @recipe.ingredients %></p>
 
-<h4>Instructions:</h4>
+<h3>Instructions:</h3>
 <p><%= @recipe.instructions %></p>
 
-<form method="POST" action="/recipes/<%= @recipe.id %>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" name="submit" value="Delete">
-</form>
+<% if @recipe.user_id == current_user.id %>
+  <form method="POST" action="/recipes/<%= @recipe.id %>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" name="submit" value="Delete">
+  </form>
+<% end %>
 
-<a href='/recipes/<%= @recipe.id %>/edit'>Edit</a><br>
+<% if @recipe.user_id == current_user.id %>
+  <a href='/recipes/<%= @recipe.id %>/edit'>Edit</a><br>
+<% end %>
 
-<a href='/recipes/<%= @recipe.id %>/review'>Review</a><br>
+<% if @recipe.user_id != current_user.id %>
+  <a href='/recipes/<%= @recipe.id %>/review'>Review</a><br>
+<% end %>
 
 <h2>Reviews</h2>
 

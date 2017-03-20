@@ -1,0 +1,13 @@
+body  {
+  background-color: DDDDDD;
+  text-align: center;
+  font-family: 'Open Sans', cursive;
+}
+
+img {
+  max-width: 600px
+}
+
+#top {
+  text-align: left;
+}
