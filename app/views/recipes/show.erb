@@ -36,13 +36,12 @@
   <a href='/recipes/<%= @recipe.id %>/edit'>Edit</a><br>
 <% end %>
 
-<% if @recipe.user_id != current_user.id %>
-  <a href='/recipes/<%= @recipe.id %>/review'>Review</a><br>
-<% end %>
-
 <h2>Reviews</h2>
 
 <% if @recipe.reviews.any? %>
+  <% if @recipe.user_id != current_user.id %>
+    <a href='/recipes/<%= @recipe.id %>/review'>Add Review</a><br>
+  <% end %>
   <% count = 1 %>
   <% @recipe.reviews.each do |review| %>
     <div>
@@ -59,6 +58,9 @@
   <% end %>
 <% else %>
     No reviews yet! Be the first.<br><br>
+    <% if @recipe.user_id != current_user.id %>
+      <a href='/recipes/<%= @recipe.id %>/review'>Add Review</a><br>
+    <% end %>
 <% end %>
 
 <a href='/recipes'>Index</a>

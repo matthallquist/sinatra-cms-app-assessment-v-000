@@ -113,7 +113,8 @@ class RecipesController < ApplicationController
       @review.delete
       redirect to '/recipes'
     else
-      redirect to "/recipes/#{@recipe.id}"
+      @recipe = Recipe.find_by(id: params[:id])
+      erb :'/recipes/show'
     end
   end
 
