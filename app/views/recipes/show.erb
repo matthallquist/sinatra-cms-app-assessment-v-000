@@ -49,10 +49,12 @@
       Posted by: <a href="/users/<%= review.user_id %>"><%= review.user.username %></a><br>
       Rating: <%= review.rating %><br>
       Content: <%= review.content %><br>
-      <form method="POST" action="/recipes/<%= @recipe.id %>/review/<%= review.id %>/delete">
-        <input id="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" name="submit" value="Delete">
-      </form>
+      <% if review.user_id == current_user.id %>
+        <form method="POST" action="/recipes/<%= @recipe.id %>/review/<%= review.id %>/delete">
+          <input id="hidden" type="hidden" name="_method" value="DELETE">
+          <input type="submit" name="submit" value="Delete">
+        </form>
+      <% end %>
     </div><br><br>
     <% count += 1 %>
   <% end %>
