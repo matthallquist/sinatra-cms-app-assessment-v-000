@@ -28,9 +28,9 @@
   <label>Cook Time:</label><br>
   <input type="text" name="cook_time" value="<%= @recipe.cook_time %>"><br><br>
   <label>Ingredients:</label><br>
-  <input type="text_area" name="ingredients" value="<%= @recipe.ingredients %>"><br><br>
+  <textarea rows="5" cols="80" name="ingredients"><%= @recipe.ingredients %></textarea><br><br>
   <label>Instructions:</label><br>
-  <input type="text_area" name="instructions" value="<%= @recipe.instructions %>"><br><br>
+  <textarea rows="5" cols="80" name="instructions"><%= @recipe.instructions %></textarea><br><br>
   <input type="submit" name="submit" value="Submit">
 
 </form>
