@@ -2,7 +2,7 @@ class Recipe < ActiveRecord::Base
   has_many :reviews
   belongs_to :user
   validates :name, :category, :prep_time, :cook_time, :ingredients, :instructions, presence: true
-  validates :name, :category, :prep_time, :cook_time, format: { with: /\A[a-zA-Z\d]+\z/,
+  validates :name, :category, :prep_time, :cook_time, format: { with: /\A[a-zA-Z\d\s]+\z/,
     message: "only allows letters and numbers" }
 
   def rating_avg
