@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   validates_presence_of :username, message: "Username cannot be blank."
   validates :username, length: { in: 6..20 }
   validates :username, uniqueness: true
-end
+  validates :username, format: { with: /\A[a-zA-Z\d]+\z/,
+    message: "only allows letters and numbers" }
+  end

@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
   end
 
   post '/recipes' do
-    @recipe = Recipe.create(photo: params[:photo_url], name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
+    @recipe = Recipe.create(name: params[:name], category: params[:category], prep_time: params[:prep_time], cook_time: params[:cook_time], ingredients: params[:ingredients], instructions: params[:instructions])
     if @recipe.valid?
       @recipe.user = current_user
       @recipe.user.recipes << @recipe
